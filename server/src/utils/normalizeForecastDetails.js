@@ -58,6 +58,26 @@ function getMostFrequentConditionCode(forecasts) {
   return Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0] || null;
 }
 
+function normalizeCurrentForecast(forecast) {
+  if (!forecast) {
+    return null;
+  }
+
+  return {
+    forecastTimeUtc: forecast.forecastTimeUtc,
+    airTemperature: forecast.airTemperature,
+    feelsLikeTemperature: forecast.feelsLikeTemperature,
+    windSpeed: forecast.windSpeed,
+    windGust: forecast.windGust,
+    windDirection: forecast.windDirection,
+    cloudCover: forecast.cloudCover,
+    seaLevelPressure: forecast.seaLevelPressure,
+    relativeHumidity: forecast.relativeHumidity,
+    totalPrecipitation: forecast.totalPrecipitation,
+    conditionCode: forecast.conditionCode,
+  };
+}
+
 function normalizeDailyForecast(date, forecasts) {
   const temperatures = forecasts.map((forecast) => forecast.airTemperature);
 
@@ -89,7 +109,7 @@ export function normalizeForecastDetails(apiResponse) {
     },
     forecastType: apiResponse.forecastType,
     forecastCreationTimeUtc: apiResponse.forecastCreationTimeUtc,
-    current: getCurrentForecast(forecastTimestamps),
+    current: normalizeCurrentForecast(getCurrentForecast(forecastTimestamps)),
     forecast: Object.entries(groupedForecasts)
       .slice(0, 5)
       .map(([date, forecasts]) => normalizeDailyForecast(date, forecasts)),

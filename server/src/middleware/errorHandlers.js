@@ -5,9 +5,23 @@ export function notFoundHandler(req, res, next) {
 }
 
 export function errorHandler(error, req, res, next) {
-  console.error(error);
+  const statusCode = error.response?.status || error.status || 500;
+
+  console.error({
+    message: error.message,
+    status: statusCode,
+    method: req.method,
+    path: req.originalUrl,
+    upstreamUrl: error.config?.url,
+  });
 
   if (error.response) {
+    if (error.response.status === 404) {
+      return res.status(404).json({
+        message: "Place not found",
+      });
+    }
+
     return res.status(error.response.status || 502).json({
       message: "Weather service returned an error",
     });
@@ -19,7 +33,10 @@ export function errorHandler(error, req, res, next) {
     });
   }
 
-  res.status(error.status || 500).json({
-    message: error.message || "Internal server error",
+  res.status(statusCode).json({
+    message:
+      process.env.NODE_ENV === "production"
+        ? "Internal server error"
+        : error.message || "Internal server error",
   });
 }

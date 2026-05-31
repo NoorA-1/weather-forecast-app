@@ -1,11 +1,10 @@
-export function logPlaceSelection(place) {
+export function logPlaceSelection(placeCode) {
   const selectedAt = new Date().toISOString();
 
-  console.log(`[${selectedAt}] Place selected: ${place.name} (${place.code})`);
+  console.log(`[${selectedAt}] Place selected: ${placeCode}`);
 
   return {
-    placeCode: place.code,
-    placeName: place.name,
+    placeCode,
     selectedAt,
   };
 }

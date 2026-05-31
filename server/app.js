@@ -3,6 +3,7 @@ import cors from "cors";
 import { env } from "./src/config/env.js";
 import healthRoutes from "./src/routes/healthRoutes.js";
 import weatherRoutes from "./src/routes/weatherRoutes.js";
+import placeRoutes from "./src/routes/placeRoutes.js";
 import {
   notFoundHandler,
   errorHandler,
@@ -20,6 +21,7 @@ app.use(express.json());
 
 app.use("/api/health", healthRoutes);
 app.use("/api/weather", weatherRoutes);
+app.use("/api/places", placeRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
