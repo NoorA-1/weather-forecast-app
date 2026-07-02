@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { getConditionLabel } from "../utils/weatherConditions";
 import { formatUpdatedTime } from "../utils/formatDate";
+import { getWeatherIconPath } from "../utils/weatherIcons";
 
 function CurrentWeatherCard({ weather }) {
   const current = weather?.current;
@@ -35,6 +36,11 @@ function CurrentWeatherCard({ weather }) {
             alignItems={{ xs: "flex-start", md: "center" }}
           >
             <Box>
+              <img
+                src={getWeatherIconPath(current.conditionCode)}
+                width="100"
+                height="100"
+              />
               <Typography variant="h2">
                 {Math.round(current.airTemperature)}°C
               </Typography>

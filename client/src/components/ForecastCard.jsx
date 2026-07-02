@@ -1,6 +1,7 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { getConditionLabel } from "../utils/weatherConditions";
 import { formatForecastDate } from "../utils/formatDate";
+import { getWeatherIconPath } from "../utils/weatherIcons";
 
 function ForecastCard({ day }) {
   return (
@@ -8,6 +9,13 @@ function ForecastCard({ day }) {
       <CardContent>
         <Stack spacing={1.5} alignItems="center">
           <Typography variant="h6">{formatForecastDate(day.date)}</Typography>
+
+          <img
+            src={getWeatherIconPath(day.conditionCode)}
+            alt={day.conditionCode || "Weather condition"}
+            width="50"
+            height="50"
+          />
 
           <Typography variant="h4">
             {Math.round(day.maxTemperature)}°C
