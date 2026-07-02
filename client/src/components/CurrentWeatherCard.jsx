@@ -24,59 +24,116 @@ function CurrentWeatherCard({ weather }) {
       <CardContent>
         <Stack spacing={3}>
           <Box>
-            <Typography variant="h5">{place.name}</Typography>
-            <Typography color="text.secondary">
+            <Typography variant="h4" fontWeight={500}>
+              {place.name}
+            </Typography>
+
+            <Typography className="secondary-text">
               {place.administrativeDivision}
             </Typography>
           </Box>
 
           <Stack
             direction={{ xs: "column", md: "row" }}
-            spacing={4}
-            alignItems={{ xs: "flex-start", md: "center" }}
+            alignItems="stretch"
+            sx={{
+              width: "100%",
+              gap: { xs: 3, md: 0 },
+            }}
           >
-            <Box>
-              <img
+            <Stack
+              direction="row"
+              spacing={2}
+              alignItems="center"
+              justifyContent={{ xs: "flex-start", md: "center" }}
+              sx={{
+                flex: { md: "0 0 330px" },
+                pr: { md: 4 },
+              }}
+            >
+              <Box
+                component="img"
                 src={getWeatherIconPath(current.conditionCode)}
-                width="100"
-                height="100"
+                alt={getConditionLabel(current.conditionCode)}
+                sx={{
+                  width: { xs: 90, sm: 110, md: 125 },
+                  height: { xs: 90, sm: 110, md: 125 },
+                  objectFit: "contain",
+                }}
               />
-              <Typography variant="h2">
-                {Math.round(current.airTemperature)}°C
-              </Typography>
 
-              <Typography variant="h5">
-                {getConditionLabel(current.conditionCode)}
-              </Typography>
-
-              {todayForecast && (
-                <Typography color="text.secondary">
-                  Min {Math.round(todayForecast.minTemperature)}°C / Max{" "}
-                  {Math.round(todayForecast.maxTemperature)}°C
+              <Stack spacing={0.5}>
+                <Typography variant="h2" sx={{ fontWeight: "400" }}>
+                  {Math.round(current.airTemperature)}°C
                 </Typography>
-              )}
-            </Box>
 
-            <Divider orientation="vertical" flexItem />
+                <Typography
+                  variant="h5"
+                  className="secondary-text"
+                  sx={{ fontWeight: "400" }}
+                >
+                  {getConditionLabel(current.conditionCode)}
+                </Typography>
+
+                {todayForecast && (
+                  <Typography className="secondary-text">
+                    Min {Math.round(todayForecast.minTemperature)}°C / Max{" "}
+                    {Math.round(todayForecast.maxTemperature)}°C
+                  </Typography>
+                )}
+              </Stack>
+            </Stack>
+
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{
+                display: { xs: "none", md: "block" },
+                height: "5rem",
+                alignSelf: "center",
+              }}
+            />
 
             <Stack
               direction={{ xs: "column", sm: "row" }}
-              spacing={3}
-              flexWrap="wrap"
+              divider={
+                <Divider
+                  orientation="vertical"
+                  flexItem
+                  sx={{
+                    display: { xs: "none", sm: "block" },
+                    height: "5rem",
+                    alignSelf: "center",
+                  }}
+                />
+              }
+              sx={{
+                flex: 1,
+                minWidth: 0,
+                alignItems: "center",
+              }}
+              spacing={2}
             >
-              <WeatherStat label="Wind" value={`${current.windSpeed} m/s`} />
+              <WeatherStat
+                icon="air"
+                label="Wind"
+                value={`${current.windSpeed} m/s`}
+              />
 
               <WeatherStat
+                icon="humidity_percentage"
                 label="Humidity"
                 value={`${current.relativeHumidity}%`}
               />
 
               <WeatherStat
+                icon="speed"
                 label="Pressure"
                 value={`${current.seaLevelPressure} hPa`}
               />
 
               <WeatherStat
+                icon="water_drop"
                 label="Precipitation"
                 value={`${current.totalPrecipitation} mm`}
               />
@@ -85,23 +142,51 @@ function CurrentWeatherCard({ weather }) {
 
           <Divider />
 
-          <Typography color="text.secondary">
-            Updated: {formatUpdatedTime(weather.forecastCreationTimeUtc)}
-          </Typography>
+          <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+            <span
+              className="material-symbols-outlined"
+              style={{
+                fontSize: "1em",
+              }}
+            >
+              schedule
+            </span>
+            <Typography className="secondary-text">
+              Updated: {formatUpdatedTime(weather.forecastCreationTimeUtc)}
+            </Typography>
+          </Stack>
         </Stack>
       </CardContent>
     </Card>
   );
 }
 
-function WeatherStat({ label, value }) {
+function WeatherStat({ icon, label, value }) {
   return (
-    <Box>
-      <Typography variant="body2" color="text.secondary">
-        {label}
-      </Typography>
-      <Typography variant="body1">{value}</Typography>
-    </Box>
+    <Stack
+      direction="row"
+      spacing={1.5}
+      alignItems="center"
+      justifyContent={{ xs: "flex-start", sm: "center" }}
+      sx={{
+        flex: 1,
+        minWidth: 0,
+        px: { xs: 0, sm: 2 },
+        py: { xs: 1.5, sm: 0 },
+      }}
+    >
+      <span className="material-symbols-outlined primary-text">{icon}</span>
+
+      <Box>
+        <Typography variant="body2" className="secondary-text">
+          {label}
+        </Typography>
+
+        <Typography variant="body1" sx={{ fontWeight: "400" }}>
+          {value}
+        </Typography>
+      </Box>
+    </Stack>
   );
 }
 

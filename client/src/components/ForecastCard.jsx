@@ -7,35 +7,44 @@ function ForecastCard({ day }) {
   return (
     <Card>
       <CardContent>
-        <Stack spacing={1.5} alignItems="center">
+        <Stack
+          spacing={1.5}
+          sx={{ paddingX: 5.3, justifyContent: "center", alignItems: "center" }}
+        >
           <Typography variant="h6">{formatForecastDate(day.date)}</Typography>
 
           <img
             src={getWeatherIconPath(day.conditionCode)}
             alt={day.conditionCode || "Weather condition"}
-            width="50"
-            height="50"
+            width="80"
+            height="80"
           />
 
-          <Typography variant="h4">
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: "500", textAlign: "center" }}
+          >
             {Math.round(day.maxTemperature)}°C
           </Typography>
 
-          <Typography color="primary">
+          <Typography
+            className="primary-text"
+            sx={{ fontWeight: "500", textAlign: "center" }}
+          >
             {Math.round(day.minTemperature)}°C
           </Typography>
 
-          <Typography textAlign="center" color="text.secondary">
+          <Typography className="secondary-text" sx={{ textAlign: "center" }}>
             {getConditionLabel(day.conditionCode)}
           </Typography>
 
-          <Typography variant="body2" color="text.secondary">
+          {/* <Typography variant="body2" className="secondary-text">
             Wind: {day.averageWindSpeed} m/s
           </Typography>
 
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" className="secondary-text">
             Rain: {day.totalPrecipitation} mm
-          </Typography>
+          </Typography> */}
         </Stack>
       </CardContent>
     </Card>
