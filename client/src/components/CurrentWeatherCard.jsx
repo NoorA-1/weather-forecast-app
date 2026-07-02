@@ -23,7 +23,7 @@ function CurrentWeatherCard({ weather }) {
       <CardContent>
         <Stack spacing={3}>
           <Box>
-            <Typography variant="h5">{place.name}</Typography>
+            <Typography variant="h4">{place.name}</Typography>
             <Typography color="text.secondary">
               {place.administrativeDivision}
             </Typography>
@@ -35,16 +35,20 @@ function CurrentWeatherCard({ weather }) {
             alignItems={{ xs: "flex-start", md: "center" }}
           >
             <Box>
-              <Typography variant="h2">
+              <Typography variant="h2" sx={{ fontWeight: "500" }}>
                 {Math.round(current.airTemperature)}°C
               </Typography>
 
-              <Typography variant="h5">
+              <Typography
+                variant="h5"
+                className="secondary-text"
+                sx={{ fontWeight: "400" }}
+              >
                 {getConditionLabel(current.conditionCode)}
               </Typography>
 
               {todayForecast && (
-                <Typography color="text.secondary">
+                <Typography className="secondary-text">
                   Min {Math.round(todayForecast.minTemperature)}°C / Max{" "}
                   {Math.round(todayForecast.maxTemperature)}°C
                 </Typography>
@@ -79,7 +83,7 @@ function CurrentWeatherCard({ weather }) {
 
           <Divider />
 
-          <Typography color="text.secondary">
+          <Typography className="secondary-text">
             Updated: {formatUpdatedTime(weather.forecastCreationTimeUtc)}
           </Typography>
         </Stack>
@@ -91,7 +95,7 @@ function CurrentWeatherCard({ weather }) {
 function WeatherStat({ label, value }) {
   return (
     <Box>
-      <Typography variant="body2" color="text.secondary">
+      <Typography variant="body2" className="secondary-text">
         {label}
       </Typography>
       <Typography variant="body1">{value}</Typography>

@@ -11,6 +11,10 @@ export const theme = createTheme({
       "sans-serif",
     ].join(","),
   },
+  text: {
+    primary: "#161616",
+    secondary: "#0f62fe",
+  },
   shape: {
     borderRadius: 12,
   },

@@ -4,28 +4,28 @@ import { formatForecastDate } from "../utils/formatDate";
 
 function ForecastCard({ day }) {
   return (
-    <Card>
+    <Card sx={{ paddingX: 4 }}>
       <CardContent>
         <Stack spacing={1.5} alignItems="center">
           <Typography variant="h6">{formatForecastDate(day.date)}</Typography>
 
-          <Typography variant="h4">
+          <Typography variant="h4" sx={{ fontWeight: "500" }}>
             {Math.round(day.maxTemperature)}°C
           </Typography>
 
-          <Typography color="primary">
+          <Typography className="primary-text" sx={{ fontWeight: "500" }}>
             {Math.round(day.minTemperature)}°C
           </Typography>
 
-          <Typography textAlign="center" color="text.secondary">
+          <Typography textAlign="center" className="secondary-text">
             {getConditionLabel(day.conditionCode)}
           </Typography>
 
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" className="secondary-text">
             Wind: {day.averageWindSpeed} m/s
           </Typography>
 
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" className="secondary-text">
             Rain: {day.totalPrecipitation} mm
           </Typography>
         </Stack>

@@ -1,4 +1,4 @@
-import { Container, Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography, Box } from "@mui/material";
 import CityDropdown from "./components/CityDropdown";
 import CurrentWeatherCard from "./components/CurrentWeatherCard";
 import ErrorMessage from "./components/ErrorMessage";
@@ -13,18 +13,22 @@ function App() {
     useWeather();
 
   return (
-    <main>
+    <main className="app">
       <Container maxWidth="lg">
         <Stack spacing={4} py={5}>
-          <Stack alignItems="center" spacing={0.5}>
-            <Typography variant="h3" component="h1">
+          <Box sx={{ alignSelf: "center" }}>
+            <Typography variant="h3" component="h1" fontWeight={500}>
               Weather Forecast
             </Typography>
 
-            <Typography variant="h6" color="text.secondary">
+            <Typography
+              variant="h6"
+              className="secondary-text"
+              textAlign="left"
+            >
               Lithuania
             </Typography>
-          </Stack>
+          </Box>
 
           <CityDropdown
             places={places}
