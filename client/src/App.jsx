@@ -1,16 +1,35 @@
-import { Container, Stack, Typography, Box } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import CityDropdown from "./components/CityDropdown";
 import CurrentWeatherCard from "./components/CurrentWeatherCard";
 import ErrorMessage from "./components/ErrorMessage";
 import ForecastList from "./components/ForecastList";
 import Loader from "./components/Loader";
+import TopViewedCities from "./components/TopViewedCities";
 import { usePlaces } from "./hooks/usePlaces";
 import { useWeather } from "./hooks/useWeather";
+import {
+  getTopViewedCities,
+  saveViewedCity,
+} from "./utils/viewedCitiesStorage";
 
 function App() {
   const { places, loadingPlaces, placesError } = usePlaces();
   const { selectedPlace, weather, loadingWeather, weatherError, loadWeather } =
     useWeather();
+
+  const [topViewedCities, setTopViewedCities] = useState([]);
+
+  useEffect(() => {
+    setTopViewedCities(getTopViewedCities());
+  }, []);
+
+  function handlePlaceChange(place) {
+    const updatedTopCities = saveViewedCity(place);
+
+    setTopViewedCities(updatedTopCities);
+    loadWeather(place);
+  }
 
   return (
     <main className="app">
@@ -21,11 +40,7 @@ function App() {
               Weather Forecast
             </Typography>
 
-            <Typography
-              variant="h6"
-              className="secondary-text"
-              textAlign="left"
-            >
+            <Typography variant="h6" className="secondary-text">
               Lithuania
             </Typography>
           </Box>
@@ -35,7 +50,12 @@ function App() {
             selectedPlace={selectedPlace}
             loading={loadingPlaces}
             disabled={loadingPlaces}
-            onPlaceChange={loadWeather}
+            onPlaceChange={handlePlaceChange}
+          />
+
+          <TopViewedCities
+            cities={topViewedCities}
+            onCityClick={handlePlaceChange}
           />
 
           {loadingPlaces && <Loader message="Loading places..." />}
@@ -53,7 +73,7 @@ function App() {
             </>
           )}
 
-          <Typography textAlign="center" color="text.secondary">
+          <Typography color="text.secondary">
             Data provided by meteo.lt
           </Typography>
         </Stack>

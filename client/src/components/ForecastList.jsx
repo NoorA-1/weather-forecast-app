@@ -14,7 +14,7 @@ function ForecastList({ forecast }) {
 
       <Grid container spacing={3}>
         {forecast.map((day) => (
-          <Grid item xs={12} sm={6} md={2.4} key={day.date}>
+          <Grid xs={12} sm={6} md={2.4} key={day.date}>
             <ForecastCard day={day} />
           </Grid>
         ))}

@@ -47,3 +47,30 @@ describe("validatePlaceCodeFormat", () => {
     });
   });
 });
+
+it("rejects non-string placeCode", () => {
+  const result = validatePlaceCodeFormat(123);
+
+  expect(result).toEqual({
+    isValid: false,
+    message: "placeCode must be a string",
+  });
+});
+
+it("rejects placeCode longer than 80 characters", () => {
+  const result = validatePlaceCodeFormat("a".repeat(81));
+
+  expect(result).toEqual({
+    isValid: false,
+    message: "placeCode is too long",
+  });
+});
+
+it("allows lowercase letters, numbers, and hyphens", () => {
+  const result = validatePlaceCodeFormat("city-123");
+
+  expect(result).toEqual({
+    isValid: true,
+    placeCode: "city-123",
+  });
+});

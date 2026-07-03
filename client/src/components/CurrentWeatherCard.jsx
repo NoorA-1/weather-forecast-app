@@ -35,7 +35,6 @@ function CurrentWeatherCard({ weather }) {
 
           <Stack
             direction={{ xs: "column", md: "row" }}
-            alignItems="stretch"
             sx={{
               width: "100%",
               gap: { xs: 3, md: 0 },
@@ -44,8 +43,6 @@ function CurrentWeatherCard({ weather }) {
             <Stack
               direction="row"
               spacing={2}
-              alignItems="center"
-              justifyContent={{ xs: "flex-start", md: "center" }}
               sx={{
                 flex: { md: "0 0 330px" },
                 pr: { md: 4 },
@@ -166,8 +163,6 @@ function WeatherStat({ icon, label, value }) {
     <Stack
       direction="row"
       spacing={1.5}
-      alignItems="center"
-      justifyContent={{ xs: "flex-start", sm: "center" }}
       sx={{
         flex: 1,
         minWidth: 0,
