@@ -47,7 +47,7 @@ npm 9+
 
 ## Setup
 
-Clone the project and install dependencies separately for the backend and frontend.
+Clone the project and install dependencies for the backend and frontend.
 
 ### Install backend and frontend dependencies
 
