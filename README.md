@@ -67,13 +67,11 @@ NODE_ENV=development
 WEATHER_API_BASE_URL=https://api.meteo.lt/v1
 ```
 
-If your backend has optional MongoDB logging later, you can also add:
+If you need logging in the MongoDB database, you can also add:
 
 ```env
 MONGODB_URI=your_mongodb_connection_string
 ```
-
-MongoDB is optional unless database logging is implemented.
 
 ## Running the App
 
