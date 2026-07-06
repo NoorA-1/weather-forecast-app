@@ -49,18 +49,10 @@ npm 9+
 
 Clone the project and install dependencies separately for the backend and frontend.
 
-### 1. Install backend dependencies
+### Install backend and frontend dependencies
 
 ```bash
-cd server
-npm install
-```
-
-### 2. Install frontend dependencies
-
-```bash
-cd ../client
-npm install
+npm run install:all
 ```
 
 ## Environment Variables
@@ -85,25 +77,9 @@ MongoDB is optional unless database logging is implemented.
 
 ## Running the App
 
-You need to run the backend and frontend in two separate terminals.
-
-### Terminal 1: Start backend
+### Terminal: Start backend and frontend
 
 ```bash
-cd server
-npm run dev
-```
-
-The backend should run on:
-
-```txt
-http://localhost:5000
-```
-
-### Terminal 2: Start frontend
-
-```bash
-cd client
 npm run dev
 ```
 
@@ -111,6 +87,12 @@ The frontend should run on:
 
 ```txt
 http://localhost:5173
+```
+
+and the backend should run on:
+
+```txt
+http://localhost:5000
 ```
 
 Open the frontend URL in the browser.
